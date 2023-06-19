@@ -17,12 +17,13 @@ public class Main {
 
 		// 테이블 생성
 //		mr.createTable();
-		mr.insert("슬럼독 밀리어네어", 2009, "대니 보일", 7.8);
+//		mr.insert("슬럼독 밀리어네어", 2009, "대니 보일", 7.8);
+//		mr.insert(new Movie("컬러풀", 2010, "하라 케이이치", 8.56));
 //		System.out.println(mr.selectAll());
-//		System.out.println(mr.selectByName("시간"));
+		System.out.println(mr.selectByName("시"));
 //		System.out.println(mr.selectByDirector("대니 보일"));
 //		System.out.println(mr.selectByRating(7.0, 8.0));
-//		mr.delete(9);
+//		mr.delete(14);
 
 	}
 }

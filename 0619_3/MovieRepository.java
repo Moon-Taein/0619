@@ -3,6 +3,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,9 +44,10 @@ public class MovieRepository implements IMovieRepository {
 			String sql = "insert into movie (name, date, director, rating) values (?, ?, ?, ?)";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, name);
-			stmt.setInt(2, date);
+			// setObject
+			stmt.setObject(2, date, Types.INTEGER);
 			stmt.setString(3, director);
-			stmt.setDouble(4, rating);
+			stmt.setObject(4, rating, Types.DOUBLE);
 			return stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -54,6 +56,13 @@ public class MovieRepository implements IMovieRepository {
 			DBUtil.close(conn);
 		}
 		return 0;
+	}
+
+	// 행 추가2
+	@Override
+	public int insert(Movie movie) {
+		// 정의된 insert 메소드에 movie 객체의 정보만을 보내서 사용
+		return insert(movie.getName(), movie.getDate(), movie.getDirector(), movie.getRating());
 	}
 
 	// 모든 영화 조회
@@ -95,7 +104,8 @@ public class MovieRepository implements IMovieRepository {
 			stmt.setString(1, "%" + partOfName + "%");
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				list.add(new Movie(rs.getString("name"), rs.getInt("date"), rs.getString("director"),
+				// getObject
+				list.add(new Movie(rs.getString("name"), rs.getObject("date", Integer.class), rs.getString("director"),
 						rs.getDouble("rating")));
 			}
 		} catch (SQLException e) {

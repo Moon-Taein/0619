@@ -7,6 +7,9 @@ public interface IMovieRepository {
 	// 행 추가 메소드
 	int insert(String name, int date, String director, double rating);
 
+	// 행 추가 메소드2
+	int insert(Movie movie);
+
 	// 모든 행 조회
 	List<Movie> selectAll();
 
